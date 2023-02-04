@@ -12,8 +12,7 @@ class Events extends Model
         'nome',
         'data',
         'local',
-        'responsavel',
-        'local'
+        'responsavel'
 
     ];
 }

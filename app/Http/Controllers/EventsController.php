@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Events;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
@@ -11,30 +12,34 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Events $events)
+    {   
+        try{
+            return response()->json([
+                "message"=>"Listado com sucesso",
+                "dados"=>$events->get(),
+            ], 200);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Events $events,Request $request)
     {
-        //
+        try{
+            $dados=$events->create($request->all());
+            return response()->json([
+                "message"=>"Criado com sucesso",
+                "dados"=>$dados
+            ],200);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -45,18 +50,15 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        try{
+            $dados=Events::find($id);
+            return response()->json([
+                "message"=>"Listado com sucesso",
+                "dados"=>$dados,
+            ], 200);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -68,7 +70,15 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{        
+            Events::find($id)->update($dados=$request->all());
+            return response()->json([
+                "message"=>"Atualizado com sucesso",
+                "dados"=>$dados,
+            ], 200);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -79,6 +89,14 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            Events::destroy($id);
+                return response()
+                ->json([
+                    "msg"=>"O registro foi deletado com sucesso.",
+                ], 200);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
 }
