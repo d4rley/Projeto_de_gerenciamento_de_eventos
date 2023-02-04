@@ -71,7 +71,9 @@ class EventsController extends Controller
     public function update(Request $request, $id)
     {
         try{        
-            Events::find($id)->update($dados=$request->all());
+            $dados=$request->all();
+            dd($dados);
+            Events::find($id)->update($dados);
             return response()->json([
                 "message"=>"Atualizado com sucesso",
                 "dados"=>$dados,

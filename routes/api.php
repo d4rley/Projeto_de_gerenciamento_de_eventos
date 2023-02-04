@@ -18,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('/evento', [EventsController::class]);
+Route::resource('/evento', EventsController::class)->except('update','store'); 
+Route::middleware('auth:sanctum')->patch('evento/{$id}',[EventsController::class,'update']);
+Route::middleware('auth:sanctum')->post('evento',[EventsController::class,'store']);

@@ -12,14 +12,15 @@ class Eventos extends Migration
      * @return void
      */
     public function up()
-    {
+    {        
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->date('data');
+            $table->string('data');
             $table->string('local');
             $table->string('responsavel')->nullable();
-        });
+            $table->timestamps();
+        });        
     }
 
     /**
