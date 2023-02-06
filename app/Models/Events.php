@@ -16,4 +16,9 @@ class Events extends Model
         'responsavel'
 
     ];
+
+    public function Participantes()
+    {
+        return $this->hasMany(Participantes::class);
+    }
 }
