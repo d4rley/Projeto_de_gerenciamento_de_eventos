@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::resource('/evento', EventsController::class)->except('update','store'); 
 Route::middleware('auth:sanctum')->patch('evento/{$id}',[EventsController::class,'update']);
-Route::post('evento',[EventsController::class,'store']);
+Route::middleware('auth:sanctum')->post('evento',[EventsController::class,'store']);
