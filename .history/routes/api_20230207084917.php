@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('entrar',[LoginController::class,'entrar']);
 Route::resource('/evento', EventsController::class)->except('update','store','delete'); 
 Route::middleware('auth:sanctum')->patch('evento/{$id}',[EventsController::class,'update']);
-Route::post('evento',[EventsController::class,'store']);
+Route::middleware('auth:sanctum')->post('evento',[EventsController::class,'store']);
 Route::middleware('auth:sanctum')->delete('evento/{$id}',[EventsController::class,'delete']);
 Route::get('eventoselect',[EventsController::class,'select']);
 Route::post('/participantes',[ParticipantesController::class,'store']);

@@ -101,10 +101,4 @@ class EventsController extends Controller
             return $e->getMessage();
         }
     }
-    public function select(){
-        return response()
-        ->json(
-            Events::get(["nome", "id"]),
-        );
-    }
 }

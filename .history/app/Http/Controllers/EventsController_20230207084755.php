@@ -104,7 +104,7 @@ class EventsController extends Controller
     public function select(){
         return response()
         ->json(
-            Events::get(["nome", "id"]),
+            Events::get(["cidade", "id"]),
         );
     }
 }
